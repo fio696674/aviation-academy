@@ -1,0 +1,64 @@
+name: CI - Mobile App
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'mobile/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'mobile/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./mobile
+        run: npm ci
+
+      - name: TypeScript check
+        working-directory: ./mobile
+        run: npx tsc --noEmit
+
+  eas-build:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./mobile
+        run: npm ci
+
+      - name: Build iOS
+        working-directory: ./mobile
+        run: npx expo run:ios --no-build-cache
+        env:
+          EXPO_NO_TELEMETRY: 1
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build Android
+        working-directory: ./mobile
+        run: npx expo run:android --no-build-cache
+        env:
+          EXPO_NO_TELEMETRY: 1
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
