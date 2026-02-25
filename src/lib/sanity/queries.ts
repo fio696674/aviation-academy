@@ -40,22 +40,23 @@ const courseFields = `
   thumbnail,
   price,
   region,
-  modules[]{
+  "modules": modules[]->{
     _id,
     title,
     description,
     orderIndex,
-    lessons[]{
+    "lessons": lessons[]->{
       _id,
       title,
       type,
       content,
-      "videoUrl": videoUrl,
+      videoUrl,
       duration,
       orderIndex
     }
   }
 `
+
 
 // Fetch all courses
 export async function getAllCourses(): Promise<Course[]> {

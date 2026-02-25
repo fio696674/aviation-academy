@@ -4,6 +4,8 @@ import { getAllCourses, type Course } from '@/lib/sanity/queries'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Header } from '@/components/Header'
+
 
 // Region badge color mapping
 const regionColors: Record<string, string> = {
@@ -97,28 +99,7 @@ export default async function CoursesPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="bg-slate-900 text-white py-4">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold hover:underline">
-            Aviation Academy
-          </Link>
-          <div className="flex gap-4">
-            <Link href="/courses" className="hover:underline">
-              Courses
-            </Link>
-            <Link href="/login" className="hover:underline">
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="bg-white text-slate-900 px-4 py-2 rounded hover:bg-slate-100"
-            >
-              Register
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Main Content */}
       <main className="flex-1 bg-slate-50 py-12">
