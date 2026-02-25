@@ -8,6 +8,7 @@ export default function Home() {
         <div className="container mx-auto px-4 flex justify-between items-center">
           <h1 className="text-xl font-bold">Aviation Academy</h1>
           <div className="flex gap-4">
+            <Link href="/courses" className="hover:underline">Courses</Link>
             <Link href="/login" className="hover:underline">Login</Link>
             <Link href="/register" className="bg-white text-slate-900 px-4 py-2 rounded hover:bg-slate-100">Register</Link>
           </div>
@@ -24,8 +25,8 @@ export default function Home() {
             Comprehensive MCP exam preparation for DGCA, FAA, and EASA
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/register" className="bg-slate-900 text-white px-6 py-3 rounded-lg hover:bg-slate-800">
-              Get Started
+            <Link href="/courses" className="bg-slate-900 text-white px-6 py-3 rounded-lg hover:bg-slate-800">
+              Browse Courses
             </Link>
             <Link href="/login" className="border border-slate-300 px-6 py-3 rounded-lg hover:bg-slate-100">
               Sign In
